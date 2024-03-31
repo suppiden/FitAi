@@ -1,10 +1,10 @@
 import Stripe from "stripe";
+import dotenv from 'dotenv'
 
-const keyBuena = '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';
-const keyPrueba = 'sk_test_51OxbMG02HGRRuhQL9eiwLKACsMRDcmqj8rcZAjwttOG666b6cxnoH0eL3HtVGVLTunuLZ9io4mClQD6SaW07849n00cWX5Jv7j';
+dotenv.config()
 
 const stripe = new Stripe
-(keyPrueba);
+(process.env.keyPrueba);
 
 export const createSession = async (req, res) => {
  const sesion = await stripe.checkout.sessions.create({
