@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Comments = ({ numberOfComments, threadId }) => {
+
+const Comments = ({ threadId }) => {
     const navigate = useNavigate();
+    const [numReplies, setNumReplies] = useState(0);
+    console.log('esto es en comments para threadID', threadId)
 
     const handleAddComment = () => {
-        navigate(`/${threadId}/replies`);
+        axios.post(`http://localhost:8081/thread/${threadId}/replies`,
+        threadId
+        ).then((data) =>{
+            setNumReplies(data.numReplies)
+            navigate(`/${threadId}/replies`);
+        })
+        
     };
 
     return (
@@ -24,7 +34,7 @@ const Comments = ({ numberOfComments, threadId }) => {
                 />
             </svg>
             <p style={{ color: "#434242" }}>
-                {numberOfComments === 0 ? "" : numberOfComments}
+                {numReplies === 0 ? "" : numReplies}
             </p>
         </div>
     );

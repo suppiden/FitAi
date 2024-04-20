@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer'
 import { body, validationResult } from 'express-validator';
+import { Novu } from '@novu/node'
+
+
 
 export const sendMail = (verificationUrl, email) => {
 let transporter1 = nodemailer.createTransport({
@@ -60,7 +63,7 @@ export const validarSesion = (req, res) => {
   if (req.session.usuarioId) {
       res.json({ authenticated: true, userId: req.session.usuarioId });
   } else {
-      res.json({ authenticated: false });
+      res.json({ authenticated: false, userId: req.session.usuarioId });
   }
 }
 
@@ -95,7 +98,92 @@ export const manejoLikes =  (req, res) => {
   });
 }
 
+export const respondeThread = async (req, res) => {
+  //👇🏻 accepts the post id, user id, and reply
+  const { id, userId, reply } = req.body;
+  //👇🏻 search for the exact post that was replied to
+  const result = threadList.filter((thread) => thread.id === id);
+  //👇🏻 search for the user via its id
+  const user = users.filter((user) => user.id === userId);
+  //👇🏻 saves the user name and reply
+  result[0].replies.unshift({
+      userId: user[0].id,
+      name: user[0].username,
+      text: reply,
+  });
+
+  await novu.trigger("topicnotification", {
+    to: [{ type: "Topic", topicKey: id }],
+});
+
+  res.json({
+      message: "Response added successfully!",
+  });
+}
+
+export const respuestas = (req, res) => {
+  // The post ID
+  const { id } = req.body;
+  // searches for the post
+  const result = threadList.filter((thread) => thread.id === id);
+  // return the title and replies
+  res.json({
+      replies: result[0].replies,
+      title: result[0].title,
+  });
+}
+
+export const registrarTopico = async (req, res) => {
+  const { email, password, username } = req.body;
+  const id = generateID();
+  const result = users.filter(
+      (user) => user.email === email && user.password === password
+  );
+
+  if (result.length === 0) {
+      const newUser = { id, email, password, username };
+      //👇🏻 add the user as a subscriber
+      await novu.subscribers.identify(id, { email: email });
+
+      users.push(newUser);
+      return res.json({
+          message: "Account created successfully!",
+      });
+  }
+  res.json({
+      error_message: "User already exists",
+  });
+}
 
 
+export const handler = async(req, res) =>{
+  if (req.method === 'GET') {
+    console.log('esto es de handler', req.session.usuarioId)
+    // Authenticate the user and retrieve the user's unique ID from your database
+    const userId = req.session.usuarioId // This should be replaced with actual authentication logic
+
+
+    // Send the subscriberId back to the client
+    res.json({ subscriberId: 'userId',
+ });
+  } else {
+    res.setHeader('Allow', ['GET']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
+
+
+export const prueba = (req, res) =>{
+  
+    console.log('getSuscriberId')
+    // Asumiendo que la autenticación se maneja y se asigna un usuarioId a la sesión
+    if (req.session.usuarioId) {
+      console.log('getSuscriberId1')
+      res.json({ userId: req.session.usuarioId });
+    } else {
+      res.status(401).json({ error: "No autenticado" });
+    }
+  
+}
 
 

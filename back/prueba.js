@@ -1,13 +1,42 @@
-// import { createClient } from '@libsql/client'
-// import nodemailer from 'nodemailer'
+import { createClient } from '@libsql/client'
+import nodemailer from 'nodemailer'
 
 
-// const db = createClient({
-//   url: "libsql://prueba-suppiden.turso.io",
-//   authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MTA3ODU2MjEsImlkIjoiMTFlZTg4ZjItYmZkZS00NTUxLWE4YjUtMDgyNjcyN2RhNzdkIn0.GPxzS-ONyY7TNPuqnM-lB9BN83nQGT-uIDUmU5EkU6TOsHYFb1m49zYNk6X8JZVf3uVxMSmCQoeeD6z4_0q6Aw"
-// })
+const db = createClient({
+  url: "libsql://prueba-suppiden.turso.io",
+  authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MTA3ODU2MjEsImlkIjoiMTFlZTg4ZjItYmZkZS00NTUxLWE4YjUtMDgyNjcyN2RhNzdkIn0.GPxzS-ONyY7TNPuqnM-lB9BN83nQGT-uIDUmU5EkU6TOsHYFb1m49zYNk6X8JZVf3uVxMSmCQoeeD6z4_0q6Aw"
+})
 
 
+
+
+
+ async function  getUserId (email) {
+    let result = await db.execute({
+      sql: `SELECT * from usersEM where email = ?`,
+      args: [email]
+      
+      
+    })
+    console.log(result.rows[0])
+    return result.rows[0].id
+  }
+
+  
+  async function create (threadTitle, userId) {
+    const generateID = () => Math.random().toString(36).substring(2, 10);
+    const  id = generateID();
+let result= await db.execute({
+  sql: `INSERT INTO new_threads (titulo, userId) VALUES (?, ?)`,
+  args: [threadTitle, userId]
+});
+
+return result.rows[0]
+} 
+
+create('blalba', 25)
+
+    
 
 
 // const insert1 = async (nombre, email) =>{

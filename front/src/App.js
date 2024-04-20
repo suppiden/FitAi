@@ -1,7 +1,8 @@
 import './index.css';
 import axios from 'axios';
-import React, { Link, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'; // Fixed import here
+import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link and useNavigate
+
 
 
 function App() {

@@ -37,8 +37,18 @@ insert = async (nombre, email, pass) =>{
       
       
     })
-    return result.rows[0].pass
+    return result.rows[0].password
   }
+
+  // getUserId = async(email) => {
+  //   let result = await db.execute({
+  //     sql: `SELECT * from usersEM where email = (:email)`,
+  //     args: { email: email}
+      
+      
+  //   })
+  //   return result.rows[0].id
+  // }
 
   getUserId = async(email) => {
     let result = await db.execute({
@@ -47,21 +57,20 @@ insert = async (nombre, email, pass) =>{
       
       
     })
-    console.log(result.rows[0])
     return result.rows[0].id
   }
+  
   
   
   comprobarUser = async(user, pass) => {
   
    let passw = this.getPass(user)
-  
     if(passw){
       bcrypt.compare(pass, passw, function(err, result) {
         if(result) {
           return true;
         } else {
-          return false
+          return false;
         }
         
       });
