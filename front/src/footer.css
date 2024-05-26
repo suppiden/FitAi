@@ -1,0 +1,34 @@
+.footer-link {
+    color: #cfd8dc; /* Gris claro para contraste */
+    text-decoration: none; /* Remover el subrayado de los links */
+    transition: color 0.3s ease; /* Transición suave para el hover */
+  }
+  
+  .footer-link:hover {
+    color: #ffccbc; /* Color más claro al hacer hover */
+  }
+  
+  .social-icon {
+    color: #cfd8dc; /* Color de los iconos sociales */
+    font-size: 24px; /* Tamaño de los iconos sociales */
+    transition: color 0.3s ease; /* Transición suave para el hover */
+  }
+  
+  .social-icon:hover {
+    color: #ffccbc; /* Color al hacer hover sobre los iconos sociales */
+  }
+  
+  .footer-text {
+    color: #eceff1; /* Color de los textos regulares */
+  }
+  
+  .footer-heading {
+    color: #b0bec5; /* Color de los títulos */
+    margin-bottom: 10px; /* Espacio debajo de los títulos */
+  }
+  
+  /* Estilos generales del contenedor del footer */
+  .footer-container {
+    background-color: #263238; /* Fondo oscuro */
+    padding: 40px 0; /* Padding vertical */
+  }

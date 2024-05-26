@@ -6,10 +6,12 @@ const novu = new Novu(process.env.Novu)
 const replies = new Replies();
 
 
+
 export const replyThread = async(req, res) =>{
 
   console.log('esto es en replyThread', req.body)
   const {id, userId, reply} = req.body;
+  console.log(id, userId)
 
   if(replies.addReply(id, userId, reply)){
     res.json({
@@ -26,11 +28,12 @@ export const getReplies = async(req, res) => {
   const { id } = req.params; // Ahora estamos obteniendo el id de req.params
 
   try {
+    console.log("aquiii")
     const NumOfReplies = await replies.countRepliesByThreadId(id); // Asumiendo que esto devuelve una promesa
     const repliesById = await replies.getRepliesById(id); // Asumiendo que esto devuelve una promesa
     console.log('esto en getreplies num',NumOfReplies)
     console.log('esto en getreplies id',repliesById)
-    if(NumOfReplies) {
+    if(NumOfReplies !== undefined) {
       res.json({ 
         NumOfReplies,
         repliesById, 

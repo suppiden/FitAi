@@ -1,11 +1,14 @@
-import './index.css';
+import './indexCatch.css';
+import Nav from './Nav';
 import axios from 'axios';
-import React, { useState } from 'react'; // Fixed import here
+import React, { useState, useEffect } from 'react'; // Fixed import here
 import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link and useNavigate
+import woman from './woman2.png'
 
 
 
 function App() {
+  const [userId, setUserId] = useState('')
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     nombre: '',
@@ -35,39 +38,50 @@ function App() {
       });
   };
 
+
   return (
+    <>
+    <Nav userId={!!userId}/>
     <main className='register'>
-      <h1 className='registerTitle'>Crea una cuenta</h1>
-    <form  className='username' onSubmit={handleSubmit}>
-      
-        <label htmlFor="nombre">Nombre:</label>
-        <input
-          id="nombre"
-          name="nombre"
-          type="text"
-          value={inputs.nombre}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          value={inputs.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">password:</label>
-        <input
-          id="pass"
-          name="pass"
-          type="password"
-          value={inputs.pass}
-          onChange={handleChange}
-        />
+  <div className='registerCard'>
+    <h1 className='registerTitle'>Crea una cuenta</h1>
+    <form className='registerForm' onSubmit={handleSubmit}>
+      <label htmlFor="nombre" style={{ color: '#fffbf5' }}>Nombre:</label>
+      <input
+        id="nombre"
+        name="nombre"
+        type="text"
+        value={inputs.nombre}
+        onChange={handleChange}
+      />
+      <label htmlFor="email" style={{ color: '#fffbf5' }}>Email:</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value={inputs.email}
+        onChange={handleChange}
+      />
+      <label htmlFor="pass" style={{ color: '#fffbf5' }}>Contraseña:</label>
+      <input
+        id="pass"
+        name="pass"
+        type="password"
+        value={inputs.pass}
+        onChange={handleChange}
+      />
       <button className='registerBtn' type="submit">Enviar</button>
-      <p> Have an account? <Link to='/'>Sign in</Link></p>
+      <p style={{ color: '#fffbf5' }}>¿Tienes una cuenta? <Link to='/'>Iniciar sesión</Link></p>
     </form>
-    </main>
+  </div>
+</main>
+<div className="image2">
+        <img src={woman} className="image" alt="Man illustration" />
+      </div>
+
+    
+    </>
+
   );
 }
 

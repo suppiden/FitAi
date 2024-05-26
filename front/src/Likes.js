@@ -1,17 +1,36 @@
 import React from "react";
 import axios from "axios";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 
 
 
 const Likes = ({ userId, thread }) => {
 
   const [numLikes, setLikes] = useState(0);
+
+
+
+  useEffect(() => {
+    axios.get(`http://localhost:8081/thread/${thread}/likes`)
+        .then(response => {
+            if (response.data && response.data.NumOfLikes !== undefined) {
+                console.log(response.data, "y esto", response.data.NumOfLikes[0].count)
+                setLikes(response.data.NumOfLikes[0].count);
+            } else {
+                console.log("No hay respuestas o el número de respuestas es 0.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al obtener respuestas: ", error);
+        });
+}, [thread]);
+
+
   const handleLikeFunction = () => {
     console.log('esto es en likes userUD',userId)
     console.log('esto es en likes thread',thread)
 
-    axios.post("http://localhost:8081/thread/like", {
+    axios.post(`http://localhost:8081/thread/${thread}/likes`, {
       thread,
       userId,
   })
@@ -21,7 +40,7 @@ const Likes = ({ userId, thread }) => {
     if (!data.success) { // Asegúrate de que la propiedad es 'success' y no 'succes'
         alert(data.error_message);
     } else {
-        setLikes(data.numLikes);
+        setLikes(prevLikes => prevLikes + 1);
         alert(data.message);
     }
 })
@@ -34,7 +53,7 @@ const Likes = ({ userId, thread }) => {
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'
-                fill='currentColor'
+                fill='green'
                 className='w-4 h-4 likesBtn'
                 onClick={handleLikeFunction}
 

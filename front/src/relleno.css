@@ -1,0 +1,107 @@
+.contenedorRelleno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+    height: 45vh; /* Altura máxima combinada */
+    padding: 10px;
+  }
+  
+  .contenidoInfo {
+    background-color: #f0f0f0; /* Mismo color de fondo para parecer uno solo */
+    color: #000; /* Color de letras negro */
+    text-align: center;
+    padding: 20px;
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+  }
+  
+  .contenidoInfo p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .conceptoClave {
+    color: #007bff; /* Color diferente para conceptos clave */
+    font-weight: bold; /* Negrita para destacar */
+  }
+  
+  .conceptoClave.grande {
+    font-size: 1.5rem; /* Tamaño de letra más grande */
+    color: #33ff3d; /* Color diferente */
+  }
+  
+  .conceptoClave.opcionPago {
+    font-size: 1.2rem; /* Tamaño de letra medio */
+    color: #28a745; /* Color diferente */
+  }
+  
+  .foros {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+  
+  .ia {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  .entreParentesis {
+    font-size: 0.9rem;
+    color: #343a40;
+  }
+  
+  /* Contenido del título */
+  .contenidoTitulo {
+    background-color: #f0f0f0; /* Mismo color de fondo */
+    color: #000; /* Color de letras negro */
+    text-align: center;
+    font-size: 1.5rem; /* Tamaño de fuente para el título */
+    padding: 10px;
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+  }
+  
+  .contenidoTitulo h2 {
+    font-size: 2rem;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .contenedorRelleno {
+      height: auto; /* Altura automática para pantallas pequeñas */
+      padding: 5px;
+    }
+  
+    .contenidoInfo, .contenidoTitulo {
+      font-size: 0.9rem; /* Ajuste de tamaño de fuente */
+      padding: 10px;
+    }
+  
+    .contenidoTitulo h2 {
+      font-size: 1.5rem; /* Ajuste de tamaño de fuente para el título */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contenidoInfo, .contenidoTitulo {
+      font-size: 0.8rem; /* Ajuste de tamaño de fuente */
+      padding: 8px;
+    }
+  
+    .contenidoTitulo h2 {
+      font-size: 1.2rem; /* Ajuste de tamaño de fuente para el título */
+    }
+  }
+  

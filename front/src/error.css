@@ -1,14 +1,15 @@
-.error__container {
-  max-width: 800px;
+/* src/components/error.css */
+.errorContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin: 0 10px;
+  margin: 20vh 10px;
 }
 
-.error__code {
+.errorCode {
   width: 100%;
   margin: 0 auto;
   font-size: 6rem;
@@ -19,32 +20,55 @@
   gap: 10px;
 }
 
-p:first-of-type {
-  animation: fall 1s linear;
+.errorDigit:first-of-type {
+  animation: errorFall1 1s linear;
   transform: rotateZ(-20deg);
 }
 
-p:last-of-type {
-  animation: fall 1.8s linear;
+.errorDigit:nth-of-type(2) {
+  animation: errorFall2 1.8s linear;
   transform: rotateZ(8deg);
 }
 
-@keyframes fall {
+.errorDigit:last-of-type {
+  animation: errorFall3 2.5s linear;
+  transform: rotateZ(-10deg);
+}
+
+@keyframes errorFall1 {
   0% {
-    transform: translateY(-100vh);
+    transform: translateY(-100vh) rotateZ(-20deg);
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0) rotateZ(-20deg);
   }
 }
 
-.error__title {
+@keyframes errorFall2 {
+  0% {
+    transform: translateY(-100vh) rotateZ(8deg);
+  }
+  100% {
+    transform: translateY(0) rotateZ(8deg);
+  }
+}
+
+@keyframes errorFall3 {
+  0% {
+    transform: translateY(-100vh) rotateZ(-10deg);
+  }
+  100% {
+    transform: translateY(0) rotateZ(-10deg);
+  }
+}
+
+.errorTitle {
   font-size: 1.5rem;
   font-weight: 700;
   padding: 0 3%;
 }
 
-.error__description {
+.errorDescription {
   font-size: 0.9rem;
   text-align: justify;
   line-height: 1.6;
@@ -65,26 +89,3 @@ p:last-of-type {
 .action:hover {
   opacity: 0.8;
 }
-
-/* Add your keyframes for the bounce animation here, according to the second screenshot */
-@keyframes bounce {
-  0%, 40%, 75%, 95% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  15% {
-    transform: translateY(-25px);
-  }
-  65% {
-    transform: translateY(-15px);
-  }
-  85% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: rotateZ(45deg);
-    opacity: 1;
-  }
-}
-
-/* You might need to add media queries and other CSS code from your screenshots to this file */

@@ -5,9 +5,11 @@
 import { createClient } from '@libsql/client';
 
 const db = createClient({
-  url: "libsql://prueba-suppiden.turso.io",
-  authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MTA3ODU2MjEsImlkIjoiMTFlZTg4ZjItYmZkZS00NTUxLWE4YjUtMDgyNjcyN2RhNzdkIn0.GPxzS-ONyY7TNPuqnM-lB9BN83nQGT-uIDUmU5EkU6TOsHYFb1m49zYNk6X8JZVf3uVxMSmCQoeeD6z4_0q6Aw"
+  url: "libsql://fitai-suppiden.turso.io",
+  authToken: process.env.keyTurso
 })
+
+
 
 export class Token{
 
@@ -16,7 +18,7 @@ export class Token{
   // Función para obtener un token por ID de usuario
     async getToken(id_user) {
       const result = await db.execute({
-        sql: "SELECT * FROM tokens2 WHERE userId = :id_user",
+        sql: "SELECT * FROM tokens WHERE userId = :id_user",
         args: { id_user: id_user }
       });
   
@@ -25,7 +27,7 @@ export class Token{
   
     async getTokenUser(token) {
       const result = await db.execute({
-        sql: "SELECT * FROM tokens2 WHERE token = :token",
+        sql: "SELECT * FROM tokens WHERE token = :token",
         args: { token: token }
       });
   
@@ -46,7 +48,7 @@ export class Token{
       }
   
       const result = await db.execute({
-        sql: "INSERT INTO tokens2 (token, timestamp, userId) VALUES (:token, :validez, :id_user)",
+        sql: "INSERT INTO tokens (token, timestamp, userId) VALUES (:token, :validez, :id_user)",
         args: { token: token, validez: validez, id_user: id_user }
       });
   
@@ -55,9 +57,11 @@ export class Token{
   
     async deleteToken(id_user) {
       const result = await db.execute({
-        sql: "DELETE FROM tokens2 WHERE userId = :id_user",
+        sql: "DELETE FROM tokens WHERE userId = :id_user",
         args: { id_user: id_user }
       });
+
+    
   
       return result; // Verifica el resultado según la API de `@libsql/client`
     }

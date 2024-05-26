@@ -1,0 +1,36 @@
+#fullScreenChat {
+    display: flex;
+    border: 1px solid black;
+    padding: 10px;
+    width: 100vw; /* Adaptado para viewport width */
+    height: 100vh; /* Adaptado para viewport height */
+    overflow-y: scroll;
+    position: fixed;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  .message {
+    display: flex;
+    padding: 10px;
+    margin: 4px 0;
+    border-radius: 15px;
+    max-width: 80%;
+  }
+  
+  .userChat {
+    background-color: #6ca26b;
+    color: white;
+    margin-left: auto;
+    border-top-right-radius: 0;
+  }
+  
+  .botChat {
+    background-color: #e5e5ea;
+    color: black;
+    margin-right: auto;
+    border-top-left-radius: 0;
+  }
+  

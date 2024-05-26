@@ -6,12 +6,21 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import  Likes  from "./Likes";
 import  Comments  from "./Comments"
+import './forum.css'
+import useVerifySession from "./customHooks/useVerifySession";
+import useVerifyEmail from "./customHooks/useVerifyEmail";
+import useVerifyPago from "./customHooks/useVerifyPago";
 
 const Home = () => {
     const navigate = useNavigate()
     const [userId, setUserId] = useState('')
     const [threads, setThreads] = useState([]);
 const [threadInput, setThreadInput] = useState('');
+    const { verified } = useVerifySession();
+    const emailError = useVerifyEmail();
+    const { userId: pagoUserId, error: pagoError } = useVerifyPago();
+    const [loading, setLoading] = useState(true); // Estado de carga
+    const [name, setName] = useState('');
 
 
    
@@ -51,6 +60,57 @@ const [threadInput, setThreadInput] = useState('');
   
       verificarSesion();
     }, [navigate]);
+
+    
+
+    useEffect(() => {
+      const fetchThreads = async () => {
+        axios.get("http://localhost:8081/create/thread", {
+
+      })
+      .then((response) => {
+          // Acceso directo a response.data en lugar de response.json()
+          setThreads(response.data.allThreads);
+          console.log(response.data.allThreads)
+      })
+      };
+  
+      fetchThreads();
+    }, [navigate]);
+
+    useEffect(() => {
+      let isMounted = true;
+
+      const fetchUser = async () => {
+          try {
+              const response = await axios.get("http://localhost:8081/user");
+              if (isMounted) {
+                  setName(response.data.name);
+                  console.log(response.data.name);
+              }
+          } catch (error) {
+              console.error('Error fetching user data:', error);
+          } finally {
+              setLoading(false); // Cambiar el estado de carga a false
+          }
+      };
+
+      fetchUser();
+
+      return () => {
+          isMounted = false;
+      };
+  }, []);
+
+  const error = emailError || pagoError;
+
+  useEffect(() => {
+      if (emailError || pagoError) {
+          navigate("/");
+      } else {
+          setLoading(false); // Cambiar el estado de carga a false
+      }
+  }, [emailError, pagoError, navigate]);
     
 
 
@@ -62,8 +122,8 @@ const [threadInput, setThreadInput] = useState('');
         })
         .then((response) => {
             // Acceso directo a response.data en lugar de response.json()
-            setThreads(response.data.allThreads);
-            console.log(response.data.allThreads)
+            /*setThreads(response.data.allThreads);
+            console.log(response.data.allThreads)*/
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -79,11 +139,11 @@ const [threadInput, setThreadInput] = useState('');
     
     return (
         <>
-            <Nav />
-            <main className='home'>
-                <h2 className='homeTitle'>Create a Thread</h2>
+            <Nav userId={!!userId}/>
+            <main className='homeForum'>
+                <h2 className='homeTitleForum'>Create a Thread</h2>
                 <form className='homeForm' onSubmit={handleSubmit}>
-                    <div className='home__container'>
+                    <div className='homeContainerForum'>
                         <label htmlFor='thread'>Title / Description</label>
                         <input
                             type='text'
@@ -92,17 +152,18 @@ const [threadInput, setThreadInput] = useState('');
                             value={threadInput}
                             onChange={(e) => setThreadInput(e.target.value)}                        />
                     </div>
-                    <button className='homeBtn'>CREATE THREAD</button>
+                    <button className='homeBtnForum'>CREATE THREAD</button>
                 </form>
-                <div className='thread__container'>
+                <div className='threadContainerForum'>
                 {threads.map((thread) => (
-                    <div className='thread__item' key={thread.id}>
+                    <div className='threadItemForum' key={thread.id}>
                         <p>{thread.titulo}</p>
-                        <div className='react__container'>
+                        <div className='reactContainerForum'>
                             <Likes userId={userId} thread={thread.id} />
                             <Comments
                                 threadId={thread.id}
                                 title={thread.titulo}
+                                userId={userId}
                             />
                         </div>
                     </div>

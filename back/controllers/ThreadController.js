@@ -21,7 +21,7 @@ export const nuevoThreads = async (req, res) => {
     res.json({
       message: "Thread created successfully!",
       newThread,
-      allThreads,
+     // allThreads,
     });
   } catch (err) {
     console.error(err);
@@ -42,5 +42,17 @@ export const respuestas = (req, res) => {
   });
 }
 
+export const allThreads = async (req, res) => {
+  const threadsModel = new Threads();
+  try {
+    const allThreads = await threadsModel.getAll();
 
+    res.json({
+      allThreads,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "An error occurred" });
+  }
+};
 

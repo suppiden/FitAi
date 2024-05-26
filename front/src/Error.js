@@ -1,23 +1,30 @@
-
+// src/components/ErrorComponent.js
 import React from 'react';
 import './error.css'; // Ensure this CSS file includes the styles shown in your screenshots
+import { useNavigate } from "react-router-dom";
+
+
 
 const ErrorComponent = () => {
+const navigate = useNavigate();
+
+  const goInicio = () => {
+    navigate("/inicio");
+  };
   return (
-    <div className="error__container">
-      <div className="error__code">
-        <p>4</p>
-        <p>0</p>
-        <p>4</p>
+    <div className="errorContainer">
+      <div className="errorCode">
+        <p className="errorDigit">4</p>
+        <p className="errorDigit">0</p>
+        <p className="errorDigit">4</p>
       </div>
-      <div className="error__title">Page Not Found</div>
-      <div className="error__description">
+      <div className="errorTitle">Page Not Found</div>
+      <div className="errorDescription">
         We can't seem to find that page. It might have been removed or doesn't exist anymore.
       </div>
-      <button className="action">Go Home</button>
+      <button className="action" onClick={goInicio}>Go Home</button>
     </div>
   );
 };
 
 export default ErrorComponent;
-

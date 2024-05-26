@@ -1,0 +1,73 @@
+.homeForum{
+    display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 30px;
+}
+
+
+.homeTitleForum{
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.homeFormForum{
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 80%;
+	margin-bottom: 30px; 
+}
+
+
+.homeContainerForum {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+}
+
+.threadContainerForum {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	padding: 20px;
+}
+.threadItemForum {
+	padding: 20px;
+	width: 80%;
+	box-shadow: 0 0 1px 1px #c3acd0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+
+.reactContainerForum {
+	display: flex;
+	align-items: center;
+}
+
+.homeBtnForum {
+    display: block;
+    width: 200px;
+    padding: 15px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fffbf5;
+    background-color: #6ca26b;
+    margin-bottom: 5px;
+}
+
+.thread{
+    font-size: 2rem;
+}

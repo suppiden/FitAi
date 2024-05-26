@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,13 +8,30 @@ const Comments = ({ threadId }) => {
     const [numReplies, setNumReplies] = useState(0);
     console.log('esto es en comments para threadID', threadId)
 
+
+    useEffect(() => {
+        axios.get(`http://localhost:8081/thread/${threadId}/replies`)
+            .then(response => {
+                if (response.data && response.data.NumOfReplies !== undefined) {
+                    setNumReplies(response.data.NumOfReplies);
+                } else {
+                    console.log("No hay respuestas o el número de respuestas es 0.");
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener respuestas: ", error);
+            });
+    }, [threadId]);
+
     const handleAddComment = () => {
-        axios.post(`http://localhost:8081/thread/${threadId}/replies`,
-        threadId
+        console.log("chacha")
+        axios.get(`http://localhost:8081/thread/${threadId}/replies`
         ).then((data) =>{
-            setNumReplies(data.numReplies)
+            console.log("esto es console log en comments en handle",data)
+            setNumReplies(data.NumOfReplies)
             navigate(`/${threadId}/replies`);
         })
+        
         
     };
 
@@ -23,7 +40,7 @@ const Comments = ({ threadId }) => {
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'
-                fill='currentColor'
+                fill='green'
                 className='w-6 h-6 likesBtn'
                 onClick={handleAddComment}
             >

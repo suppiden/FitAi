@@ -21,10 +21,39 @@ let transporter1 = nodemailer.createTransport({
 
 // Opciones del correo electrónico
 let mailOptions = {
-  from: '"Fitai" abastospruebajon@gmail.com', // Dirección del remitente
+  from: '"Fitai" <abastospruebajon@gmail.com>', // Dirección del remitente
   to: email, // Lista de destinatarios
-  subject: 'Verifica tu cuenta', // Asunto // cuerpo del correo en texto plano
-  html: `<p>Haz clic en el siguiente enlace para verificar tu cuenta: <a href="${verificationUrl}">${verificationUrl}</a></p>` // cuerpo del correo en HTML
+  subject: 'Verifica tu cuenta', // Asunto
+  html: `
+    <div style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px; color: #333;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: #6ca26b; text-align: center;">Bienvenido a Fitai!</h2>
+        <p style="font-size: 16px; line-height: 1.5; color: #555;">
+          Gracias por registrarte en Fitai. Estamos encantados de tenerte con nosotros.
+        </p>
+        <p style="font-size: 16px; line-height: 1.5; color: #555;">
+          Por favor, haz clic en el siguiente enlace para verificar tu cuenta:
+        </p>
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="${verificationUrl}" style="display: inline-block; background-color: #6ca26b; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+            Verificar Cuenta
+          </a>
+        </div>
+        <p style="font-size: 14px; line-height: 1.5; color: #888;">
+          Si el enlace no funciona, copia y pega la siguiente URL en tu navegador:
+        </p>
+        <p style="font-size: 14px; line-height: 1.5; color: #888;">
+          <a href="${verificationUrl}" style="color: #6ca26b;">${verificationUrl}</a>
+        </p>
+        <p style="font-size: 14px; line-height: 1.5; color: #888;">
+          Si no te has registrado en Fitai, por favor ignora este correo.
+        </p>
+        <div style="text-align: center; margin-top: 30px;">
+          <img src="https://your-logo-url.com/logo.png" alt="Fitai" style="width: 100px; height: auto;">
+        </div>
+      </div>
+    </div>
+  ` // cuerpo del correo en HTML
 };
 
 // Enviar el correo electrónico

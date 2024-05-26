@@ -16,6 +16,8 @@ export class TokenController{
   }
 
 
+
+
    confirmarToken = async (req, res) => {
     try {
       const token1 = new Token();
@@ -33,9 +35,12 @@ export class TokenController{
         if (activacionExitosa) {
           // Si la activación fue exitosa, procedemos a borrar el token
           await token1.deleteToken(req.query.token);
-          return res.json({ success: true, message: 'Email confirmado' });
+          return res.redirect('http://localhost:3000/success');
+//          return res.json({ success: true, message: 'Email confirmado' });
         } else {
           // La activación falló por alguna razón
+          return res.redirect('http://localhost:3000/error');
+
           return res.json({ success: false, message: 'La activación ha fallado' });
         }
       } else {

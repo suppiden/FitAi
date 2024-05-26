@@ -4,10 +4,10 @@ import cors from 'cors';
 import { recuperarIdSesion, validarSesion,
    validateAndSanitize, respondeThread, respuestas, registrarTopico, handler, prueba } from './libs/utils.js';
 import { TokenController } from './controllers/TokenController.js';
-import { manejoLikes } from './controllers/LikesController.js';
-import { registro } from './controllers/UserController.js';
+import { getLikes, likeThread, manejoLikes } from './controllers/LikesController.js';
+import { activacionPago, nameUser, registro, verificationEmail, verificationPago } from './controllers/UserController.js';
 import { login } from './controllers/UserController.js';
-import { nuevoThreads } from './controllers/ThreadController.js';
+import { allThreads, nuevoThreads } from './controllers/ThreadController.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { getReplies, replyThread } from './controllers/RepliesController.js';
@@ -60,9 +60,27 @@ router.get('/verify', TokenCont.confirmarToken);
 
  app.post('/inicio', login) 
 
+
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send({ error: "No se pudo cerrar la sesión correctamente." });
+    }
+    res.clearCookie('connect.sid', { path: '/' }); // Asegúrate de que el nombre de la cookie y la ruta coincidan con tu configuración.
+    return res.send({ message: "Sesión cerrada correctamente." });
+  });
+});
+
+
  app.post('/pago', createSession)
 
  app.get('/validarSesion', validarSesion);
+
+ app.get('/validarEmail', verificationEmail );
+
+ app.get('/validarPago', verificationPago);
+
+ app.post('/activarPago', activacionPago);
 
  // Endpoint para obtener el userId
 app.get("/get-user-id", (req, res) => {
@@ -82,14 +100,24 @@ app.get('/getSubscriberId', prueba )
 //forum
  app.get("/user/id", recuperarIdSesion);
 
+app.get('/user', nameUser)
+
  app.post("/create/thread", nuevoThreads);
 
- app.post("/thread/like", manejoLikes);
+ app.get("/create/thread", allThreads);
+
+ //app.post("/thread/like", manejoLikes);
 
  app.post("/thread/reply", replyThread );
 
+ app.post("/thread/:id/replies", replyThread );
+
 // Cambia la ruta para incluir el parámetro `id`
 app.get("/thread/:id/replies", getReplies);
+
+app.get("/thread/:id/likes", getLikes);
+
+app.post("/thread/:id/likes", likeThread);
 
 
 
@@ -188,8 +216,10 @@ app.post('/completions', async (req, res) => {
     stream: true
   });
 
+
+  // curl -X GET http://10.39.39.194:1234/v1/models
   const options = {
-    hostname: 'localhost',
+    hostname: '10.39.39.194',
     port: 1234,
     path: '/v1/chat/completions',
     method: 'POST',

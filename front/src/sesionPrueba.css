@@ -1,0 +1,98 @@
+/* Estilos generales para escritorio */
+.containerSesion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 78%;
+    left: 10%;
+    position: absolute;
+    top: 50vh;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imageSesion, .imageSesion1 {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    transition: filter 0.3s ease;
+    filter: drop-shadow(5px 5px 5px #222);
+    display: block;
+    border-radius: 5px;
+    height: 39vh;
+}
+
+.imageSesion:hover, .imageSesion1:hover {
+    filter: drop-shadow(10px 10px 20px green);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.textSesion {
+    left: 37vw;
+    position: absolute;
+    color: #434242;
+    margin: 20px;
+    font-size: 24px;
+    width: auto;
+    top: 10vh;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #6ca26b;
+}
+
+.barra {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    top: 35vh;
+    height: 60vh;
+    background-color: black;
+}
+
+.exploraChats, .participaForos {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.exploraChats:hover, .participaForos:hover {
+    color: #6ca26b;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 768px) {
+    .containerSesion {
+        flex-direction: column; /* Cambio a disposición vertical */
+        align-items: center;
+        top: 60vh; /* Ajuste la posición si es necesario */
+    }
+
+    .item {
+        margin-bottom: 20px;
+    }
+
+    .imageSesion, .imageSesion1 {
+        height: 60vh;
+        width: 59vw;
+        margin-bottom: 21vh;
+        margin-top: 14vh; /* Ajustar el tamaño para móviles */
+    }
+
+    .barra {
+        display: none; /* Ocultar la barra en dispositivos móviles */
+    }
+
+    .textSesion {
+        top: 15vh;
+        left: 53%;
+        transform: translateX(-50%);
+    }
+}

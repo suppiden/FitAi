@@ -44,21 +44,98 @@ export const registro = async (req, res) =>{
 }
 
 
-export const login = async(req, res) =>{
+export const login = async (req, res) => {
+  const User = new UserModel();
+  try {
+    const comprobacion = await User.comprobarUser(req.body.email, req.body.pass);
+    if (comprobacion) {
+      req.session.usuarioId = await User.getUserId(req.body.email);
+      res.json({ success: true, message: 'Login completado', userId: req.session.usuarioId });
+    } else {
+      res.json({ success: false, message: 'Contraseña incorrecta' });
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ success: false, message: 'Error en el servidor' });
+  }
+};
+   
+
+
+
+export const nameUser = async(req, res) =>{
+  const User = new UserModel();
+  try{
+    let name = await User.getUserName(req.session.usuarioId)
+  
+     res.json({success: true, name: name});
+    
+   }catch(e){
+     console.log(e)
+   }
+ 
+  
+}
+
+
+export const verificationEmail = async(req, res) =>{
+  const User = new UserModel();
+  try{
+    console.log("esto es en verificationEmail", req.session.usuarioId)
+    let verify = await User.getVerificacion(req.session.usuarioId)
+    console.log("esto es verify de email", verify.verified)
+    if(verify.verified!=0){
+     res.json({success: true});
+    }else{
+      res.json({success: false});
+    }
+   }catch(e){
+     console.log(e)
+   }
+ 
+}
+
+
+
+export const verificationPago = async(req, res) =>{
+  const User = new UserModel();
+  try{
+    let pago = await User.getPago(req.session.usuarioId)
+    console.log(pago.verificationToken, "esto es en userController")
+    if(pago.verificationToken !=null){
+     res.json({success: true});
+    }else{
+      res.json({success: false});
+    }
+   }catch(e){
+     console.log(e)
+   }
+  }
+
+
+   export const activacionPago = async(req, res) =>{
     const User = new UserModel();
     try{
-      let comprobacion = User.comprobarUser(req.body.email, req.body.pass)
-      if(comprobacion){
-      req.session.usuarioId= await User.getUserId(req.body.email);
-       res.json({success: true, message: 'Login completado', userId: 'joya' });
+      console.log(req.session.usuarioId, "esto es activacion pago" )
+      let pago = await User.activacionPago(req.session.usuarioId, req.body.price)
+      if(pago !=0){
+       res.json({success: true});
       }else{
-       console.log("algo ha pasado")
+        res.json({success: false});
       }
      }catch(e){
        console.log(e)
      }
-   
+
+
+
+ 
 }
+
+
+
+
+
 
 
  
