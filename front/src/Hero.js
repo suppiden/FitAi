@@ -61,17 +61,17 @@ function Hero({ userId, error }) {
     {
       title: 'Basic Plan',
       price: '$9.99',
-      description: 'Perfect for individuals just starting out.',
+      description: '1 month, just joking and finding out.',
     },
     {
       title: 'Premium Plan',
       price: '$19.99',
-      description: 'Ideal for small teams and projects.',
+      description: '3 months, now you are pretty serious.',
     },
     {
       title: 'Pro Plan',
       price: '$29.99',
-      description: 'Best for growing businesses.',
+      description: '6 months, let the grind begin',
     },
   ];
 

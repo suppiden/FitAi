@@ -1,40 +1,31 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useVerifyPago = () => {
-    const [userId, setUserId] = useState(null);
+const useVerifyPago = (userId) => {
+    const [pagoStatus, setPagoStatus] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        let isMounted = true;
-
         const verificarPago = async () => {
+            if (!userId) return;  // No verificar si no hay userId
+
             try {
                 const response = await axios.get('http://localhost:8081/validarPago');
-                if (isMounted) {
-                    console.log("esto es en verifypagoooooooooo", response.data.success)
-                    if (!response.data.success) {
-                        setError("No ha pagado");
-                    } else {
-                        setUserId("ha pagado");
-                    }
+                if (response.data.success) {
+                    setPagoStatus("ha pagado");
+                } else {
+                    setError("No ha pagado");
                 }
             } catch (error) {
-                if (isMounted) {
-                    console.error('Error verificando el pago:', error);
-                    setError("Tienes que pagar! Elige la opción de pago más abajo");
-                }
+                console.error('Error verificando el pago:', error);
+                setError("Tienes que pagar! Elige la opción de pago más abajo");
             }
         };
 
         verificarPago();
+    }, [userId]);
 
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
-    return { userId, error };
+    return { pagoStatus, error };
 }
 
 export default useVerifyPago;

@@ -9,7 +9,6 @@ import './sesion.css';
 import useVerifySession from "./customHooks/useVerifySession";
 import useVerifyEmail from "./customHooks/useVerifyEmail";
 import useVerifyPago from "./customHooks/useVerifyPago";
-import ErrorBox from "./ErrorBox";
 
 function Sesion() {
     const navigate = useNavigate();
@@ -18,6 +17,20 @@ function Sesion() {
     const emailError = useVerifyEmail();
     const { userId: pagoUserId, error: pagoError } = useVerifyPago();
     const [loading, setLoading] = useState(true); // Estado de carga
+
+
+
+    useEffect(() => {
+        if (emailError || pagoError) {
+            navigate("/");
+        } else {
+            setLoading(false); // Cambiar el estado de carga a false
+        }
+    }, [emailError, pagoError, navigate]);
+
+
+
+
 
     useEffect(() => {
         let isMounted = true;

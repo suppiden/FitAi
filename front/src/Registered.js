@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const SuccessToken = () => {
+const Registered = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,11 +24,11 @@ const SuccessToken = () => {
             fontSize: '24px',
             fontFamily: 'Arial, sans-serif'
         }}>
-            <h1>Cuenta verificada con éxito</h1>
-            <p>Tu acción se ha completado. Serás redirigido en breve.</p>
+            <h1>Cuenta registrada con éxito</h1>
+            <p>Tu acción se ha completado. Comprueba tu email.</p>
             <p>Si no eres redirigido automáticamente, <Link to="/">pulsa aquí</Link>.</p>
         </div>
     );
 };
 
-export default SuccessToken;
+export default Registered;

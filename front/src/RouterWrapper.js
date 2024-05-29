@@ -15,6 +15,7 @@ import Relleno from './Relleno';
 import PaymentSuccess from './PaymentSucces';
 import SuccessToken from './SuccesToken';
 import SesionPrueba from './SesionPrueba';
+import Registered from './Registered';
 
 // Asume que tienes un componente para la sesión
 
@@ -34,7 +35,9 @@ function RouterWrapper() {
         <Route path='/chat' element={<ChatComponent />} />
         <Route path='/error' element={<ErrorComponent />} />
         <Route path='/success' element={<SuccessToken />} />
+        <Route path='/registered' element={<Registered />} />
         <Route path='/relleno' element={<Relleno />} />
+        <Route path="*" element={<ErrorComponent />} />
       </Routes>
     </Router>
   );

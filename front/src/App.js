@@ -1,7 +1,7 @@
 import './indexCatch.css';
 import Nav from './Nav';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'; // Fixed import here
+import React, { useState } from 'react'; // Fixed import here
 import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link and useNavigate
 import woman from './woman2.png'
 
@@ -30,7 +30,7 @@ function App() {
       .then(response => {
         if(response.data.success) {
           // Redirecciona al usuario a sesion.html
-          navigate('/sesion');
+          navigate('/registered');
       }
       })
       .catch(error => {
@@ -71,7 +71,7 @@ function App() {
         onChange={handleChange}
       />
       <button className='registerBtn' type="submit">Enviar</button>
-      <p style={{ color: '#fffbf5' }}>¿Tienes una cuenta? <Link to='/'>Iniciar sesión</Link></p>
+      <p style={{ color: '#fffbf5' }}>¿Tienes una cuenta? <Link to='/inicio'>Iniciar sesión</Link></p>
     </form>
   </div>
 </main>

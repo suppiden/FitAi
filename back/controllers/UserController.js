@@ -66,6 +66,9 @@ export const login = async (req, res) => {
 export const nameUser = async(req, res) =>{
   const User = new UserModel();
   try{
+    if (!req.session.usuarioId) {
+      return res.json({ success: false, message: "No autenticado" });
+  }
     let name = await User.getUserName(req.session.usuarioId)
   
      res.json({success: true, name: name});
@@ -78,39 +81,40 @@ export const nameUser = async(req, res) =>{
 }
 
 
-export const verificationEmail = async(req, res) =>{
+export const verificationEmail = async (req, res) => {
   const User = new UserModel();
-  try{
-    console.log("esto es en verificationEmail", req.session.usuarioId)
-    let verify = await User.getVerificacion(req.session.usuarioId)
-    console.log("esto es verify de email", verify.verified)
-    if(verify.verified!=0){
-     res.json({success: true});
-    }else{
-      res.json({success: false});
-    }
-   }catch(e){
-     console.log(e)
-   }
- 
+  try {
+      if (!req.session.usuarioId) {
+          return res.json({ success: false, message: "No autenticado" });
+      }
+      console.log("esto es en verificationEmail", req.session.usuarioId);
+      let verify = await User.getVerificacion(req.session.usuarioId);
+      console.log("esto es verify de email", verify.verified);
+      res.json({ success: verify.verified !== 0 });
+  } catch (e) {
+      console.log(e);
+      res.status(500).json({ success: false, message: "Error en el servidor" });
+  }
 }
 
 
 
-export const verificationPago = async(req, res) =>{
+export const verificationPago = async (req, res) => {
   const User = new UserModel();
-  try{
-    let pago = await User.getPago(req.session.usuarioId)
-    console.log(pago.verificationToken, "esto es en userController")
-    if(pago.verificationToken !=null){
-     res.json({success: true});
-    }else{
-      res.json({success: false});
-    }
-   }catch(e){
-     console.log(e)
-   }
+  try {
+      if (!req.session.usuarioId) {
+          return res.json({ success: false, message: "No autenticado" });
+      }
+      console.log("esto es en verificationPago", req.session.usuarioId);
+      let pago = await User.getPago(req.session.usuarioId);
+      console.log(pago.verificationToken, "esto es en userController en verification pago");
+      res.json({ success: pago.verificationToken != null });
+  } catch (e) {
+      console.log(e);
+      res.status(500).json({ success: false, message: "Error en el servidor" });
   }
+}
+
 
 
    export const activacionPago = async(req, res) =>{
@@ -129,6 +133,7 @@ export const verificationPago = async(req, res) =>{
 
 
 
+    
  
 }
 

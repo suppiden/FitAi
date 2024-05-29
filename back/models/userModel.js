@@ -65,6 +65,7 @@ insert = async (nombre, email, pass) =>{
   }
 
 
+
   getUserName = async(id) => {
     let result = await db.execute({
       sql: `SELECT * from usersEM where id = (:id)`,
@@ -108,6 +109,7 @@ getVerificacion = async(id) => {
   })
   return result.rows[0]
 }
+
 
 getPago = async(id) => {
   let result = await db.execute({

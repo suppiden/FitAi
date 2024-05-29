@@ -9,7 +9,18 @@
     top: 50vh;
 }
 
-.imageSesion, .imageSesion1 {
+.imageSesion1 {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    transition: filter 0.3s ease;
+    filter: drop-shadow(5px 5px 5px #222);
+    display: block;
+    border-radius: 5px;
+    height: 39vh;
+}
+
+.imageSesion {
     width: 100%;
     max-width: 400px;
     margin: 10px 0;

@@ -9,7 +9,7 @@ const ErrorComponent = () => {
 const navigate = useNavigate();
 
   const goInicio = () => {
-    navigate("/inicio");
+    navigate("/");
   };
   return (
     <div className="errorContainer">

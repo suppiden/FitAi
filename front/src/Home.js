@@ -13,17 +13,30 @@ import useVerifyPago from "./customHooks/useVerifyPago";
 
 const Home = () => {
     const navigate = useNavigate()
-    const [userId, setUserId] = useState('')
+    
     const [threads, setThreads] = useState([]);
 const [threadInput, setThreadInput] = useState('');
-    const { verified } = useVerifySession();
-    const emailError = useVerifyEmail();
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago();
     const [loading, setLoading] = useState(true); // Estado de carga
     const [name, setName] = useState('');
+ 
+ 
+    /*const [userId, setUserId] = useState('')
+    const { verified } = useVerifySession();
+    const emailError = useVerifyEmail();
+    const { userId: pagoUserId, error: pagoError } = useVerifyPago();*/
 
-
-   
+    const { userId } = useVerifySession();
+    const emailError = useVerifyEmail();
+    const { userId: pagoUserId, error: pagoError } = useVerifyPago();
+  
+  
+    useEffect(() => {
+      if (emailError || pagoError) {
+          navigate("/");
+      } else {
+          setLoading(false); // Cambiar el estado de carga a false
+      }
+  }, [emailError, pagoError, navigate]);
 
 
     const handleSubmit = (e) => {
@@ -38,7 +51,7 @@ const [threadInput, setThreadInput] = useState('');
   };
 
 
-
+/*
     useEffect(() => {
       const verificarSesion = async () => {
         try {
@@ -60,7 +73,7 @@ const [threadInput, setThreadInput] = useState('');
   
       verificarSesion();
     }, [navigate]);
-
+*/
     
 
     useEffect(() => {
@@ -78,7 +91,7 @@ const [threadInput, setThreadInput] = useState('');
       fetchThreads();
     }, [navigate]);
 
-    useEffect(() => {
+   /* useEffect(() => {
       let isMounted = true;
 
       const fetchUser = async () => {
@@ -111,7 +124,7 @@ const [threadInput, setThreadInput] = useState('');
           setLoading(false); // Cambiar el estado de carga a false
       }
   }, [emailError, pagoError, navigate]);
-    
+    */
 
 
 

@@ -6,39 +6,39 @@ import TestimonialCard from './TestimonialCards'; // Asegúrate de importar Test
 // { quote, author, role, imageUrl }
 const testimonialsData = [
   // Tus datos de testimonios van aquí
-  {"quote" : "blablabl",
-    "author" : "me",
-    "role" : "some",    
+  {"quote" : "¡Esto es magnífico!",
+    "author" : "Juana",
+    "role" : "Usuaria satisfecha",    
 
 
 },
-{"quote" : "blablabl",
-"author" : "me",
-"role" : "some",    
+{"quote" : "¡Pensé que sería mucho mas complicado!",
+"author" : "Nayara",
+"role" : "Usuaria satisfecha",    
 
 
 },
-{"quote" : "blablabl",
-"author" : "me",
-"role" : "some",    
+{"quote" : "La comunidad es super amigable",
+"author" : "Juanfran",
+"role" : "Usuario satisfecho",    
 
 
 },
-{"quote" : "blablabl",
-"author" : "me",
-"role" : "some",    
+{"quote" : "Siempre me ha causado respeto entrenar, ya no",
+"author" : "Dolores",
+"role" : "Usuaria satisfecha"    
 
 
 },
-{"quote" : "blablabl",
-"author" : "me",
-"role" : "some",    
+{"quote" : "Estaba estancado y ahora vuelvo a vanzar",
+"author" : "Ronnie",
+"role" : "Usuario satisfecho",    
 
 
 },
-{"quote" : "blablabl",
-"author" : "me",
-"role" : "some",    
+{"quote" : "Un precio muy competente para el mercado",
+"author" : "Charlie",
+"role" : "Usuario satisfecho",    
 
 
 }

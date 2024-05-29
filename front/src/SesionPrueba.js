@@ -32,7 +32,7 @@ function SesionPrueba() {
     const [name, setName] = useState('');
     const { userId } = useVerifySession();
     const emailError = useVerifyEmail();
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago();
+    const {  error: pagoError } = useVerifyPago();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

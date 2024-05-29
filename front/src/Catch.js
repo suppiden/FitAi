@@ -2,7 +2,6 @@ import man from '../src/man1.png';
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import './indexCatch.css';
-import './index.css';
 import paint from'../src/paint1.png';
 import ErrorBox from "./ErrorBox";
 import BotonToken from './BotonToken';
@@ -78,10 +77,10 @@ function Catch({error}) {
       <div className="side-home">
         <div className="max-w-md">
           <h1 className="text-4xl font-bold mb-4">
-            Welcoming <span className="text-gray-500">Per Training</span>
+            Welcome to <span className="text-gray-500">FitAi Training</span>
           </h1>
           <p className="mb-6">
-            Your catchy marketing text could go here to explain a bit more.
+            Where technology meets fitness to help achieve your goals.
           </p>
           <button
             className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
