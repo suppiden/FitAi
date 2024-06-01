@@ -5,7 +5,6 @@ import Inicio from './Inicio';
 import Failed from './failed';
 import Pago from './BotonPago';
 import Home from './HomeFit';
-//import HomePage from './HomePage';
 import Replies from './Replies' 
 import Forum from './Home'
 import ChatComponent from './Chat';
@@ -13,10 +12,8 @@ import ErrorComponent from './Error';
 import Relleno from './Relleno';
 import SuccessToken from './SuccesToken';
 import Registered from './Registered';
-import Catch2 from './Catch2';
 import PaymentSuccess from './PaymentSucces';
 import SesionPrueba from './SesionPrueba'
-import HomeFit2 from './HomeFit2';
 
 // Asume que tienes un componente para la sesión
 

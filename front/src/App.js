@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link a
 import woman from './woman2.png';
 
 function App() {
-  const [userId, setUserId] = useState(''); // Puedes eliminar esta línea si no usas setUserId
+  const [userId, setUserId] = useState(''); 
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     nombre: '',

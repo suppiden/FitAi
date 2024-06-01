@@ -1,109 +1,84 @@
-import { Link } from "react-router-dom";
-import man from '../src/manTest.png';
-import woman from './woman2.png';
+import './indexCatch.css';
 import Nav from './Nav';
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import './sesionPrueba.css';
-import useVerifySession from "./customHooks/useVerifySession";
-import useVerifyEmail from "./customHooks/useVerifyEmail";
-import useVerifyPago from "./customHooks/useVerifyPago";
-import styled from 'styled-components';
+import axios from 'axios';
+import React, { useState } from 'react'; // Fixed import here
+import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link and useNavigate
+import woman from './woman2.png';
 
-const UserName = styled.span`
-  color: #6ca26b;
-  font-weight: bold;
-  font-size: 1.2em;
-  background-color: #e0f7e0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+function App() {
+  const [userId, setUserId] = useState(''); // eslint-disable-line no-unused-vars
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    nombre: '',
+    email: '',
+    pass: ''
+  });
 
-  &:hover {
-    background-color: #6ca26b;
-    color: white;
-    transform: scale(1.1);
-  }
-`;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
-function SesionPrueba() {
-    const navigate = useNavigate();
-    const [name, setName] = useState('');
-        const { userId } = useVerifySession();
-    const emailError = useVerifyEmail(userId);
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId);
-    const [loading, setLoading] = useState(true); // Estado de carga
-
-
-
-    useEffect(() => {
-        if (emailError || pagoError) {
-            navigate("/");
-        } else {
-            setLoading(false); // Cambiar el estado de carga a false
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8081/sesion', inputs)
+      .then(response => {
+        if (response.data.success) {
+          // Simulamos que se ha asignado un userId al iniciar sesión correctamente
+          setUserId(response.data.userId || 'someUserId'); // Esto es solo para evitar el warning
+          // Redirecciona al usuario a sesion.html
+          navigate('/registered');
         }
-    }, [emailError, pagoError, navigate]);
+      })
+      .catch(error => {
+        console.error('Error al enviar datos:', error);
+      });
+  };
 
-    useEffect(() => {
-        let isMounted = true;
-
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get("http://localhost:8081/user");
-                if (isMounted) {
-                    setName(response.data.name);
-                    console.log(response.data.name);
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUser();
-
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
-    const error = emailError || pagoError;
-
-    useEffect(() => {
-        if (emailError || pagoError) {
-            navigate("/");
-        } else {
-            setLoading(false);
-        }
-    }, [emailError, pagoError, navigate]);
-
-    if (loading) {
-        return <div>Cargando...</div>;
-    }
-
-    return (
-        <>
-            <Nav userId={!!userId} />
-            <p className="textSesion">Has iniciado sesión <UserName>{name}</UserName></p>
-            <div className="containerSesion">
-                <div className="item">
-                    <div className="exploraChats">Explora nuestros chats</div>
-                    <Link to="/chat">
-                        <img src={woman} alt="Chat" className="imageSesion" />
-                    </Link>
-                </div>
-                <div className="item">
-                    <div className="participaForos">Participa en los foros</div>
-                    <Link to="/forum">
-                        <img src={man} alt="Foro" className="imageSesion1" />
-                    </Link>
-                </div>
-            </div>
-            <div className="barra"></div>
-        </>
-    );
+  return (
+    <>
+      <Nav userId={!!userId} />
+      <main className='register'>
+        <div className='registerCard'>
+          <h1 className='registerTitle'>Crea una cuenta</h1>
+          <form className='registerForm' onSubmit={handleSubmit}>
+            <label htmlFor="nombre" style={{ color: '#fffbf5' }}>Nombre:</label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              value={inputs.nombre}
+              onChange={handleChange}
+            />
+            <label htmlFor="email" style={{ color: '#fffbf5' }}>Email:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={inputs.email}
+              onChange={handleChange}
+            />
+            <label htmlFor="pass" style={{ color: '#fffbf5' }}>Contraseña:</label>
+            <input
+              id="pass"
+              name="pass"
+              type="password"
+              value={inputs.pass}
+              onChange={handleChange}
+            />
+            <button className='registerBtn' type="submit">Enviar</button>
+            <p style={{ color: '#fffbf5' }}>¿Tienes una cuenta? <Link to='/inicio'>Iniciar sesión</Link></p>
+          </form>
+        </div>
+      </main>
+      <div className="image2">
+        <img src={woman} className="image" alt="Man illustration" />
+      </div>
+    </>
+  );
 }
 
-export default SesionPrueba;
+export default App;
