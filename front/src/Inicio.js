@@ -7,7 +7,7 @@ import woman from './woman2.png';
 
 function Inicio({ nombre, contra }) {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState(''); // eslint-disable-line no-unused-vars
   const [inputs, setInputs] = useState({
     email: '',
     pass: ''

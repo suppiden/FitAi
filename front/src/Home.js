@@ -16,7 +16,7 @@ const Home = () => {
     const [threadInput, setThreadInput] = useState('');
     const { userId } = useVerifySession();
     const emailError = useVerifyEmail(userId);
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId);
+    const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId); // eslint-disable-line no-unused-vars
     const [loading, setLoading] = useState(true); // Estado de carga
 
     useEffect(() => {

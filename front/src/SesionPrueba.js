@@ -28,7 +28,7 @@ function App() {
       .then(response => {
         if (response.data.success) {
           // Simulamos que se ha asignado un userId al iniciar sesión correctamente
-          setUserId(response.data.userId || 'someUserId'); // Esto es solo para evitar el warning
+          setUserId(response.data.userId || 'someUserId'); // eslint-disable-line no-unused-vars
           // Redirecciona al usuario a sesion.html
           navigate('/registered');
         }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./indexCatch.css";
 import axios from "axios";
 import { Tooltip } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+
 const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] = useState("up");
 

@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
-import Sesion from './Sesion'; 
 import Inicio from './Inicio';
 import Failed from './failed';
 import Pago from './BotonPago';
@@ -21,7 +20,6 @@ function RouterWrapper() {
   return (
     <Router>
       <Routes>
-        <Route path="/test" element={<Sesion />} />
         <Route path="/" element={<Home />} />
         <Route path="/sesion" element={<SesionPrueba />} />
         <Route path="/inicio" element={<Inicio />} />
