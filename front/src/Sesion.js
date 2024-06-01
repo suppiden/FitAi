@@ -14,8 +14,8 @@ function Sesion() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const { userId } = useVerifySession();
-    const emailError = useVerifyEmail();
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago();
+    const emailError = useVerifyEmail(userId);
+    const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId);
     const [loading, setLoading] = useState(true); // Estado de carga
 
 

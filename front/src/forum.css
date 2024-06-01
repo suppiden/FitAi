@@ -8,6 +8,14 @@
 	padding: 30px;
 }
 
+/* forum.css */
+.spinner-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  }
+  
 
 .homeTitleForum{
     margin-bottom: 30px;

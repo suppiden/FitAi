@@ -77,7 +77,6 @@ insert = async (nombre, email, pass) =>{
   }
   
   
-  
   async comprobarUser(user, pass) {
     const passw = await this.getPass(user);
     if (passw) {

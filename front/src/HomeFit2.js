@@ -14,7 +14,7 @@ import useVerifyEmail from "./customHooks/useVerifyEmail";
 import useVerifyPago from "./customHooks/useVerifyPago";
 import Catch2 from './Catch2.js';
 
-function HomeFit() {
+function HomeFit2() {
     const navigate = useNavigate();
     const { userId, error: sessionError } = useVerifySession();
     const emailError = useVerifyEmail(userId);
@@ -30,16 +30,14 @@ function HomeFit() {
 
     return (
         <>
-            <Nav userId={!!userId} error={error} />
-            <Catch error={error} />
-            <ChakraProvider>
-                <Hero userId={userId} error={emailError} />
-                <Relleno />
-                <Testimonials />
-            </ChakraProvider>
-            <Footer />
+            <Nav />
+            <Catch2  />
+            <Catch2 />
+            <Catch2  />
+            
+            
         </>
     );
 }
 
-export default HomeFit;
+export default HomeFit2;

@@ -3,27 +3,26 @@
 @tailwind utilities;
 
 /* Contenedor principal */
+
+.buttonWrapper {
+    position: absolute;
+    top: 51vh;
+    left: 68%;
+    margin-right: 20%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: #0077cc;
+  }
+
+  
+
 .catch-container {
   display: flex;
   flex-direction: row;
   width: 100%;
-  position: relative;
   height: 100vh;
   overflow: hidden;
 }
-
-
-.buttonWrapper {
-  position: absolute;
-  top: 0;
-  left: 64%;
-  margin-right: 20%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  background-color: #0077cc;
-}
-
-
 
 /* Sección lateral izquierda (side-home) */
 .side-home {
@@ -38,48 +37,92 @@
   box-sizing: border-box;
 }
 
-/* Imagen de fondo del hombre */
+
 .image-container{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 400px;
-}
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 400px;
+  }
 
 
 .image1 {
-  width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24rem;
+    position: absolute;
+    bottom: -28.3px;
+    left: 0;
+    top: 59px;
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  .image {
+    position: relative;
+    left: -24%;
+    width: 330px;
+    height: 410px;
+  }
+  
+
+
+
+/* Segunda que he probado con pixeles
+.image1 {
+  width: 337px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 24rem;
+  padding: 20px;
+  height: 405px;
   position: absolute;
-  bottom: -28.3px;
-  left: 0;
-  top: 59px;
-  margin: 0;
   padding: 0;
-  height: 400px;
-  overflow: hidden;
+  margin: 0;
+  bottom: -6.3vh;
+  left: 18%;
+  top: 63.75vh;
 }
 
-.imageCatch {
-  position: relative;
-  left: -24%;
-  width: 330px;
-  height: 410px;
-}
+*/
 
-/* Añadir a tu archivo CSS, por ejemplo, chatComponent.css */
-.spinner-container {
+
+
+
+
+/*
+Primera que sirve en mi pantalla de mac
+
+image1 {
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 20px;
+  height: 42vh;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  bottom: -6.3vh;
+  left: 38vh;
+  top: 63.75vh;
+}*/
+
+.image {
+  position: relative;
+    left: -24%;
+    width: 330px;
+    height: 410px;
 }
 
-
-
+/*position: relative;
+    left: -24%;
+    width: 330px;
+    height: 410px;*/
 
 #chatSimulation {
     display: flex;
@@ -89,7 +132,7 @@
   height: 56vh;
   overflow-y: scroll;
   position: relative;
-  left: 14vh;
+  left: 12%;
   top: 19vh;
   margin-right: 18%;
   flex-direction: column;
@@ -134,9 +177,18 @@
   z-index: 1;
 }
 
+.buttonWrapper{
+    position: absolute;
+    top: 47vh;
+    left: 64%;
+    margin-right: 20%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: #0077cc;
+}
 .overlay-button {
   position: absolute;
-  top: 47vh;
+  top: 0vh;
   left: 64%;
   margin-right: 20%;
   transform: translate(-50%, -50%);
@@ -300,22 +352,10 @@
         height: 200vh;
     }
 
-    .buttonWrapper {
-      position: absolute;
-      top: 0;
-      left: 44%;
-      margin-right: 20%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      background-color: #0077cc;
-    }
-
   .side-home {
     width: 100%;
     height: 100vh;
   }
-
- 
 
   .image1 {
     display: none;

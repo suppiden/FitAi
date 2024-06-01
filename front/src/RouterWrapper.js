@@ -8,14 +8,15 @@ import Home from './HomeFit';
 //import HomePage from './HomePage';
 import Replies from './Replies' 
 import Forum from './Home'
-import Test from './Test';
 import ChatComponent from './Chat';
 import ErrorComponent from './Error';
 import Relleno from './Relleno';
-import PaymentSuccess from './PaymentSucces';
 import SuccessToken from './SuccesToken';
-import SesionPrueba from './SesionPrueba';
 import Registered from './Registered';
+import Catch2 from './Catch2';
+import PaymentSuccess from './PaymentSucces';
+import SesionPrueba from './SesionPrueba'
+import HomeFit2 from './HomeFit2';
 
 // Asume que tienes un componente para la sesión
 
@@ -23,9 +24,9 @@ function RouterWrapper() {
   return (
     <Router>
       <Routes>
-        <Route path="/test" element={<SesionPrueba />} />
+        <Route path="/test" element={<Sesion />} />
         <Route path="/" element={<Home />} />
-        <Route path="/sesion" element={<Sesion />} />
+        <Route path="/sesion" element={<SesionPrueba />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/registro" element={<App />} />
         <Route path="/failed" element={<Failed />} />
@@ -35,6 +36,7 @@ function RouterWrapper() {
         <Route path='/chat' element={<ChatComponent />} />
         <Route path='/error' element={<ErrorComponent />} />
         <Route path='/success' element={<SuccessToken />} />
+        <Route path='/successPay' element={<PaymentSuccess />} />
         <Route path='/registered' element={<Registered />} />
         <Route path='/relleno' element={<Relleno />} />
         <Route path="*" element={<ErrorComponent />} />

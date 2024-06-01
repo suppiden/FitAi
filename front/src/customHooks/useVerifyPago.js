@@ -14,7 +14,7 @@ const useVerifyPago = (userId) => {
                 if (response.data.success) {
                     setPagoStatus("ha pagado");
                 } else {
-                    setError("No ha pagado");
+                    setError("Realiza el pago");
                 }
             } catch (error) {
                 console.error('Error verificando el pago:', error);

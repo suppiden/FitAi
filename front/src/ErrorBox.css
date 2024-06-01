@@ -1,0 +1,23 @@
+.error-box {
+    background-color: rgba(255, 0, 0, 0.2); /* Rojo transparente */
+    color: red;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    text-align: center;
+    height: 5vh;
+    width: 30%;
+    position: absolute;
+    left: 65%; /* Posición por defecto */
+    top: 80vh;
+    transform: translateX(-50%); /* Centrar basado en la posición left actual */
+  }
+  
+  @media (max-width: 600px) {
+    .error-box {
+      left: 32%; /* Cambiar la posición left en pantallas más pequeñas */
+      transform: translateX(0); /* Eliminar el centrado para la nueva posición */
+    }
+  }
+  

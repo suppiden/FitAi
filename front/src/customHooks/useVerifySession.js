@@ -13,9 +13,11 @@ const useVerifySession = () => {
                 const response = await axios.get('http://localhost:8081/validarSesion');
                 if (!response.data.authenticated) {
                     navigate("/");
+                    console.log("baaaaaaaaa")
                     setError("No autenticado");
                 } else {
                     setUserId(response.data.userId);
+                    console.log("beeeeeeee")
                 }
             } catch (error) {
                 console.error('Error verificando la sesión:', error);

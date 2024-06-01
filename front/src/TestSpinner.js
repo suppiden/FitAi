@@ -1,14 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import man from '../src/manTest.png';
 import woman from './woman2.png';
 import Nav from './Nav';
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import './sesionPrueba.css';
-import useVerifySession from "./customHooks/useVerifySession";
-import useVerifyEmail from "./customHooks/useVerifyEmail";
-import useVerifyPago from "./customHooks/useVerifyPago";
 import styled from 'styled-components';
 
 const UserName = styled.span`
@@ -30,62 +26,52 @@ const UserName = styled.span`
 function SesionPrueba() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
-        const { userId } = useVerifySession();
-    const emailError = useVerifyEmail(userId);
-    const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId);
-    const [loading, setLoading] = useState(true); // Estado de carga
-
-
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        if (emailError || pagoError) {
-            navigate("/");
-        } else {
-            setLoading(false); // Cambiar el estado de carga a false
-        }
-    }, [emailError, pagoError, navigate]);
+        const verifyUser = async () => {
+            const userId = localStorage.getItem("_id");
+            if (!userId) {
+                navigate("/");
+                return;
+            }
 
-    useEffect(() => {
-        let isMounted = true;
-
-        const fetchUser = async () => {
             try {
-                const response = await axios.get("http://localhost:8081/user");
-                if (isMounted) {
-                    setName(response.data.name);
-                    console.log(response.data.name);
+                const [sessionRes, emailRes, pagoRes] = await Promise.all([
+                    axios.get(`http://localhost:8081/verify-session/${userId}`),
+                    axios.get(`http://localhost:8081/verify-email/${userId}`),
+                    axios.get(`http://localhost:8081/verify-pago/${userId}`)
+                ]);
+
+                if (!sessionRes.data.success || !emailRes.data.success || !pagoRes.data.success) {
+                    setError('Error en la verificación. Redirigiendo...');
+                    setTimeout(() => navigate("/"), 2000);
+                } else {
+                    const userRes = await axios.get(`http://localhost:8081/user/${userId}`);
+                    setName(userRes.data.name);
+                    setLoading(false);
                 }
             } catch (error) {
-                console.error('Error fetching user data:', error);
-            } finally {
-                setLoading(false);
+                setError('Error al verificar el usuario. Redirigiendo...');
+                setTimeout(() => navigate("/"), 2000);
             }
         };
 
-        fetchUser();
-
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
-    const error = emailError || pagoError;
-
-    useEffect(() => {
-        if (emailError || pagoError) {
-            navigate("/");
-        } else {
-            setLoading(false);
-        }
-    }, [emailError, pagoError, navigate]);
+        verifyUser();
+    }, [navigate]);
 
     if (loading) {
         return <div>Cargando...</div>;
     }
 
+    if (error) {
+        return <div>{error}</div>;
+    }
+
     return (
         <>
-            <Nav userId={!!userId} />
+            <Nav userId={!!localStorage.getItem("_id")} />
             <p className="textSesion">Has iniciado sesión <UserName>{name}</UserName></p>
             <div className="containerSesion">
                 <div className="item">
