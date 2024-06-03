@@ -30,7 +30,7 @@ function Inicio({ nombre, contra }) {
         if (response.data.success) {
           localStorage.setItem("_id", response.data.userId);
           console.log('Ha traído algo y es:', response.data.userId);
-          navigate('/sesion');
+          navigate('/');
         } else {
           setErrorMessage(response.data.message);
         }

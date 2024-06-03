@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer'
 import { body, validationResult } from 'express-validator';
-import { Novu } from '@novu/node'
 
 
 
@@ -48,9 +47,6 @@ let mailOptions = {
         <p style="font-size: 14px; line-height: 1.5; color: #888;">
           Si no te has registrado en Fitai, por favor ignora este correo.
         </p>
-        <div style="text-align: center; margin-top: 30px;">
-          <img src="https://your-logo-url.com/logo.png" alt="Fitai" style="width: 100px; height: auto;">
-        </div>
       </div>
     </div>
   ` // cuerpo del correo en HTML
