@@ -55,13 +55,16 @@ const Home = () => {
         }
     };
 
+  
+
     const createThread = (thread, userId) => {
         axios.post("http://localhost:8081/create/thread", {
             thread,
             userId,
         })
             .then((response) => {
-                // Manejar la respuesta si es necesario
+                alert(response.data.message); // Accede directamente a `res.data` para obtener los datos.
+            navigate("/forum")
             })
             .catch((error) => {
                 console.error('Error:', error);

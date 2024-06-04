@@ -116,7 +116,7 @@ const Replies = () => {
             <div className='thread__item' key={reply.id}>
               <p>{reply.content}</p>
               <div className='react__container'>
-                <p style={{ opacity: "0.5" }}>by {name}</p>
+                <p style={{ opacity: "0.5" }}></p>
               </div>
             </div>
           ))}

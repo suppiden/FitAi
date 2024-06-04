@@ -33,6 +33,9 @@ getAll =async () => {
     const result = await db.execute('SELECT * FROM new_threads ORDER BY created_at DESC');
     return result.rows;
   } 
+
+
+
   
 
 }

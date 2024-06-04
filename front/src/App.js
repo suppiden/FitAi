@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Correctly import Link a
 import woman from './woman2.png';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const [userId, setUserId] = useState(''); 
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({

@@ -150,7 +150,7 @@ app.post('/completions', async (req, res) => {
 
   // curl -X GET http://10.39.39.194:1234/v1/models
   const options = {
-    hostname: '10.39.39.194',
+    hostname: 'localhost',
     port: 1234,
     path: '/v1/chat/completions',
     method: 'POST',
@@ -159,6 +159,7 @@ app.post('/completions', async (req, res) => {
       'Content-Length': dataString.length
     }
   };
+
 
   const reqLM = http.request(options, (resLM) => {
     let contentAccumulated = ''; // Para acumular solo el contenido de los mensajes

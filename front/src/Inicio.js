@@ -70,8 +70,8 @@ function Inicio({ nombre, contra }) {
           </form>
         </div>
       </main>
-      <div className="image2">
-        <img src={woman} className="image" alt="Man illustration" />
+      <div className="image">
+        <img src={woman} className="image2" alt="Man illustration" />
       </div>
     </>
   );

@@ -81,6 +81,9 @@ export const nameUser = async(req, res) =>{
 }
 
 
+
+
+
 export const verificationEmail = async (req, res) => {
   const User = new UserModel();
   try {

@@ -31,7 +31,7 @@ function SesionPrueba() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const { userId } = useVerifySession();
-    const emailError = useVerifyEmail(userId);
+    const emailError = useVerifyEmail(userId); // eslint-disable-next-line no-unused-vars
     const { userId: pagoUserId, error: pagoError } = useVerifyPago(userId);
     const [loading, setLoading] = useState(true); // Estado de carga
 

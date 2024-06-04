@@ -92,18 +92,18 @@ function Hero({ userId, error }) {
   return (
     <Flex align="center" justify="center" height="100vh" width="100vw" className="hero-container">
       {isMobile ? (
-        <Swiper slidesPerView={1} spaceBetween={30} pagination={{ clickable: true }} style={{ width: '100%' }}>
+        <Swiper slidesPerView={1} spaceBetween={40} pagination={{ clickable: true }} style={{ width: '100%' }}>
           {cards.map((card, index) => (
             <SwiperSlide key={index}>
               <Card>
-                <Heading size='md' color={'white'} mb={4}>{card.title}</Heading>
+                <Heading size='md' color={'white'} mb={40}>{card.title}</Heading>
                 <Text fontSize={priceFontSize} fontWeight="bold" my={6} color={priceColor}>
                   {card.price}
                 </Text>
-                <Text mb={6}>{card.description}</Text>
+                <Text mb={20}>{card.description}</Text>
                 <Tooltip label={!userId ? "You need to log in to choose a plan" : error ? "You need to verify the email" : ""} shouldWrapChildren>
                   <Button 
-                    mt={4} 
+                    mt={20} 
                     bg={'#22c55e'} 
                     onClick={() => handlePayment(card)} 
                     isDisabled={!userId || error} // Deshabilitar si no hay userId o si hay un error
@@ -120,7 +120,7 @@ function Hero({ userId, error }) {
         <SimpleGrid columns={3} spacing={10} p={10} w="full" maxW="1200px" height="80vh">
           {cards.map((card, index) => (
             <Card key={index}>
-              <Heading size='md' mb={40}>{card.title}</Heading>
+              <Heading size='md' mb={30}>{card.title}</Heading>
               <Text fontSize={priceFontSize} fontWeight="bold" my={6} color={priceColor}>
                 {card.price}
               </Text>
